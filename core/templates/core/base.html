@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <link rel="stylesheet" href="{% static 'css/main_base.css' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="{% static 'img/favicon.svg' %}">
+  <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
+  <!-- Primary Meta Tags -->
+  <title>ABO - Asesoría Legal Simplificada | {% block title %}{% endblock %}</title>
+  <meta name="title" content="ABO">
+  <meta name="description" content="Estudio Jurídico Online">
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.abo.cl/">
+  <meta property="og:title" content="Abo | Abogados">
+  <meta property="og:description" content="Estudio Jurídico Online.">
+  <!--<meta property="og:image" content="{% static 'img/foto.png' %}">-->
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://www.abo.cl/">
+  <meta property="twitter:title" content="Abo | Abogados">
+  <meta property="twitter:description" content="Estudio Jurídico Online.">
+  <!--<meta property="twitter:image" content="{% static 'img/foto.png' %}">-->
+</head>
+<body>
+
+<header>
+
+    {% if user.is_staff %}<div class="blackback">
+        <div class="fontwhite bottom10 font18 top10 width1200">
+            <span><span><a class="fontwhite" href="{% url 'admin_procesos' %}">Procesos</a></span>
+        </div>
+    </div>{% endif %} 
+
+{% if user.is_authenticated %}
+    <div>
+      <div class="fontwhite font18 bottom10 top10 middle width1200 space gap90">
+        <div class="top20 bottom10"><a href="{% url 'landing' %}"><img src="{% static 'img/logo.svg' %}" width="160"></a></div>
+        <div>
+          <div class="space">
+            <span class="left30"><a href="{% url 'perfil' %}">[Mi Perfil]</a></span>
+            <span class="left30"><a href="{% url 'salir' %}">Cerrar Sesión</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endif %}
+
+{% if user.is_authenticated %}<div class="graywhiteback bordertop borderbottom">
+    <div class="bottom10 top10 width1200 font18">
+        <span><a href="{% url 'landing' %}">Dashboard</a></span>
+    </div>
+  </div>{% endif %} 
+
+{% if user.is_authenticated %}{% else %}
+
+</header>
+{% endif %} 
+
+{% block content %}{% endblock %}
+
+
+
+</body>
+</html>

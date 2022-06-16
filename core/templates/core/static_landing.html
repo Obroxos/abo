@@ -1,0 +1,19 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}Portada{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}{% else %}
+	<div class="width600 bottom60 center center-center">
+		<span class="bottom30 inline-block"><a href="{% url 'landing' %}"><img src="{% static 'img/logo.svg' %}" width="140"><b></b></a></span>
+		<br>
+		<span class="fonth3">Asesoría Legal <span class="bold">Simplificada</span></span>
+		<br>
+		<span class="fonth6">Seguimiento de procesos</span>
+		<br>
+		<br>
+		<a href="{% url 'ingreso' %}" class="btn">Acceso</a>
+	</div>
+{% endif %} 
+{% endblock %}

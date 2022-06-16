@@ -1,0 +1,42 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}Blog{% endblock %}
+{% block content %}
+
+<div class="width1200 bottom60">
+<div class="space middle">
+<div><h3>procesos</h3></div>
+<div><a href="{% url 'admin_procesos_crear' %}" class="btn">Nueva</a></div>
+</div>
+
+{% if proceso_list %}    
+<div class="scroll">
+<table class="customTable width1200">
+  <thead>
+    <tr>
+      <th>Fecha</th>
+      <th>Título</th>
+      <th>Autor</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+              
+      {% for proceso in proceso_list %}
+      <tr>   
+        <td>{{proceso.created|date:"d b Y"}}</td>
+        <td>{{ proceso.title }}</td>
+        <td>{{ proceso.author.first_name }} {{ proceso.author.last_name }}</td>
+        <td><a href="{{ proceso.pk }}"><b>[Editar]</b></a> <a href="{{ proceso.pk }}/eliminar"><b>[X]</b></a></td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+
+{% else %}
+<p>No hay procesos ingresadas</p>
+{% endif %} 
+
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}Login{% endblock %}
+
+
+
+
+{% block content %}
+{% if user.is_authenticated %}{% else %}
+    <div class="width300 bottom60 center center-center">
+        <span class="bottom30 inline-block"><a href="{% url 'landing' %}"><img src="{% static 'img/logo.svg' %}" width="140"><b></b></a></span>
+        <br>
+        <span class="fonth4">Acceso a la <span class="bold">cuenta</span></span>
+        <br>
+        <br>
+
+        <form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    {% if form.errors %}
+    <p>El usuario o contraseña no son correctos</p>
+    {% endif %}
+    {% if next %}
+        {% if user.is_authenticated %}
+        <p>No tienes acceso a esta página.</p>
+        {% else %}
+        <p>Necesitas acceder para ver el contenido.</p>
+        {% endif %}
+    {% endif %}
+    <label>Usuario</label>
+    {{ form.username }}
+    <label>Contraseña</label>
+    {{ form.password }}
+    <button type="submit">Acceder</button>
+    <input type="hidden" name="next" value="{{ next }}" />
+    <br>
+    <a href="{% url 'password_reset' %}">¿Olvidaste tu contraseña?</a>
+    </form>
+
+    </div>
+{% endif %} 
+{% endblock %}
